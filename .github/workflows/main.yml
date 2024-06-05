@@ -19,7 +19,7 @@ jobs:
           sudo apt-get install -y ninja-build libfmt-dev
 
       - name: cmake build arm
-        run: cmake -G Ninja -B build --preset android-armeabi-v7a -DSPDLOG_FMT_EXTERNAL=ON
+        run: cmake -G Ninja -B build --preset android-armeabi-v7a -DSPDLOG_FMT_EXTERNAL
 
       - name: Run Ninja -j
         run: ninja -C build

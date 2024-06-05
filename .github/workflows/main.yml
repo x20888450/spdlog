@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-project:
+    name: Build project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Install Ninja
+        run: sudo apt-get install ninja-build
+
+      - name: cmake build arm
+        run: cmake -G Ninja -B build --preset android-armeabi-v7a
+
+      - name: Run Ninja -j
+        run: ninja -C build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+          retention-days: 3
